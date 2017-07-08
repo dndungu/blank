@@ -1,2 +1,2 @@
 # church_mouse
-A golang application that servers a coloured web page.
+A golang application that serves a coloured web page.

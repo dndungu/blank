@@ -2,7 +2,7 @@
   <head>
   <title>Just a {{.Name}} page</title>
   <style>
-    body {padding: 4em; background-color: {{.Code}}}
+    body {padding: 4em; background-color: {{.Code}};}
   </style>
   </head>
   <body>

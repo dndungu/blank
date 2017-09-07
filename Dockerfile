@@ -1,6 +1,6 @@
 FROM golang:1.9 as builder
 
-LABEL maintainer "David Ndungu <dndungu@zendesk>"
+LABEL maintainer "David Ndungu <dnjuguna@gmail.com>"
 
 WORKDIR /app
 

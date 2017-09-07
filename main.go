@@ -9,9 +9,10 @@ import (
 
 func main() {
 	colour := struct {
-		Code string
-		Name string
-	}{Code: "#000000", Name: "black"}
+		BackgroundColour string
+		Colour           string
+		Name             string
+	}{BackgroundColour: "#000000", Colour: "#888888", Name: "black"}
 
 	t, err := template.ParseFiles("page.tpl")
 

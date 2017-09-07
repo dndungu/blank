@@ -4,8 +4,8 @@
   <style>
     body {
       padding: 4em;
-      background-color: {{.Code}};
-      color: #888888;
+      background-color: {{.BackgroundColour}};
+      color: {{.Colour}};
     }
   </style>
   </head>

@@ -8,7 +8,7 @@ at 2017 Google Next Conference.
 
 # Deployment
 
-We use kubernetes on GCP.
+We recommending using kubernetes on Google Container Engine.
 
 ## Contributing
 Fork, create PR and cc @dndungu

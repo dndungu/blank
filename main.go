@@ -12,7 +12,7 @@ func main() {
 		BackgroundColour string
 		Colour           string
 		Name             string
-	}{BackgroundColour: "#000000", Colour: "#888888", Name: "black"}
+	}{BackgroundColour: "#444444", Colour: "#888888", Name: "grey"}
 
 	t, err := template.ParseFiles("page.tpl")
 

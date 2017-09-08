@@ -1,4 +1,5 @@
 # BlankPage
+
 A useless Golang application that serves a coloured blank web page.
 
 This simple app is intended to be used for testing deployment strategies. It was

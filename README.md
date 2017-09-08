@@ -8,7 +8,7 @@ at 2017 Google Next Conference.
 
 # Deployment
 
-We use kubernetes
+We use kubernetes for now.
 
 ## Contributing
 Fork, create PR and cc @dndungu

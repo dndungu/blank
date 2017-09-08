@@ -10,4 +10,4 @@ We recommending using kubernetes on Google Container Engine. You can also create
 and manage your own kubernetes cluster.
 
 ## Contributing
-Fork, create PR and cc @dndungu
+We welcome contributions. Fork, create PR and cc @dndungu

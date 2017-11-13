@@ -15,13 +15,6 @@ spec:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
     spec:
-      initContainers:
-      - name: wait-for-consul
-        image: bash
-        command: ["bash", "-c", "until nc -v -z -w 1 consul-import 1024; do echo waiting for consul-import:1024; sleep 2; done; echo consul-import is done; sleep 3"]
-      - name: wait-for-mysql
-        image: bash
-        command: ["bash", "-c", "until nc -v -z -w 1 mysql-import 1024; do echo waiting for mysql-import:1024; sleep 2; done; echo mysql-import is done."]
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

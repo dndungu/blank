@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: blankpage
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blankpage
+  template:
+    metadata:
+      labels:
+        app: blankpage
+    spec:
+      containers:
+        -
+          name: blankpage
+          image: gcr.io/project-1804904848208322692/github-dndungu-blankpage:385b71ecfa02970cd298cdf4b6db6e6f20ab7e92
+          imagePullPolicy: IfNotPresent
+          env:
+            -
+              name: "BLANKPAGE_PORT"
+              value: "80"
+          resources:
+            limits:
+              cpu: 10m
+              memory: 25Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          ports:
+            -
+              name: blankpage
+              containerPort: 80

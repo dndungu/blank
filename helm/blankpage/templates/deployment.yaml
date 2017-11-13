@@ -1,39 +1,46 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: blankpage
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: blankpage
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: blankpage
+        app: {{ template "name" . }}
+        release: {{ .Release.Name }}
     spec:
+      initContainers:
+      - name: wait-for-consul
+        image: bash
+        command: ["bash", "-c", "until nc -v -z -w 1 consul-import 1024; do echo waiting for consul-import:1024; sleep 2; done; echo consul-import is done; sleep 3"]
+      - name: wait-for-mysql
+        image: bash
+        command: ["bash", "-c", "until nc -v -z -w 1 mysql-import 1024; do echo waiting for mysql-import:1024; sleep 2; done; echo mysql-import is done."]
       containers:
-        -
-          name: blankpage
-          image: gcr.io/project-1804904848208322692/github-dndungu-blankpage:385b71ecfa02970cd298cdf4b6db6e6f20ab7e92
-          imagePullPolicy: IfNotPresent
-          env:
-            -
-              name: "BLANKPAGE_PORT"
-              value: "80"
-          resources:
-            limits:
-              cpu: 10m
-              memory: 25Mi
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
+             {{- range $key, $value := .Values.ports }}
             -
-              name: blankpage
-              containerPort: 80
+              name: {{ $key }}
+              containerPort: {{ .value }}
+            {{- end }}
+          env:
+           {{- range .Values.env }}
+            -
+              name: {{ .name | quote }}
+              value: {{ .value | quote }}
+          {{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}

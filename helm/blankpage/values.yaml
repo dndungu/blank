@@ -6,10 +6,11 @@ image:
 service:
   name: blankpage
   type: ClusterIP
-  externalPort: 80
-  internalPort: 80
+ports:
+  http:
+    value: 80
 ingress:
-  enabled: true
+  enabled: false
   hosts:
     - blankpage.david-ndungu.com
   annotations:
@@ -19,7 +20,7 @@ ingress:
     - secretName: blankpage-tls
       hosts:
         - blankpage.david-ndungu.com
-resources: {}
+resources:
   limits:
     cpu: 100m
     memory: 128Mi

@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blankpage
+spec:
+  rules:
+  - host: support.zd-pod.com
+    http:
+      paths:
+      - backend:
+          serviceName: blankpage
+          servicePort: 80

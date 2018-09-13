@@ -1,0 +1,12 @@
+steps:
+- id: "docker-build"
+  name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '--tag=gcr.io/$PROJECT_ID/apps/blankpage:latest'
+    - '--tag=gcr.io/$PROJECT_ID/apps/blankpage:$COMMIT_SHA'
+    - '.'
+
+images: 
+  - 'gcr.io/$PROJECT_ID/apps/blankpage:latest'
+  - 'gcr.io/$PROJECT_ID/apps/blankpage:$COMMIT_SHA'
